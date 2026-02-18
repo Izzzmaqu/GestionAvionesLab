@@ -1,0 +1,46 @@
+﻿@model IEnumerable<GestionAviones.Model.Avion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lista de Aviones</h1>
+
+<p>
+    <a asp-action="Crear" class="btn btn-success">Registrar</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Modelo)</th>
+            <th>@Html.DisplayNameFor(model => model.Estado)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
+                <td>@Html.DisplayFor(modelItem => item.Estado)</td>
+                <td>
+                    @Html.ActionLink("Detalles", "Detalles", new { id = item.Id }, new { @class = "btn btn-info" }) |
+                    @Html.ActionLink("Editar", "Editar", new { id = item.Id }, new { @class = "btn btn-warning" }) |
+                    @if (item.Estado == GestionAviones.Model.Estado.Activo)
+                    {
+                        @Html.ActionLink("Inactivar", "DesActivar", new { id = item.Id }, new { @class = "btn btn-danger" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Activar", "Activar", new { id = item.Id }, new { @class = "btn btn-success" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

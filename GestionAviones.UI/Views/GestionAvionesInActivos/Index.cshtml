@@ -1,0 +1,31 @@
+﻿@model IEnumerable<GestionAviones.Model.Avion>
+
+@{
+    ViewData["Title"] = "Aviones Inactivos";
+}
+
+<h1>Lista de Aviones Inactivos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Modelo)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.Modelo)</td>
+                <td>
+                    @Html.ActionLink("Activar", "Activar", new { id = item.Id }, new { @class = "btn btn-success" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
